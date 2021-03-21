@@ -8,6 +8,19 @@ find_package(Qt5 COMPONENTS Widgets SerialPort REQUIRED)
 
 include_directories(.)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
+
+if(CMAKE_HOST_WIN32)
+  add_compile_definitions(_TTY_WIN_)
+	if(MSVC)
+		set_target_properties(${PROJECT_NAME} PROPERTIES
+			WIN32_EXECUTABLE YES
+			LINK_FLAGS "/ENTRY:mainCRTStartup"
+		)
+	elseif(CMAKE_COMPILER_IS_GNUCXX)
+			SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
+	endif(MSVC)
+endif()
+
 add_executable(serialPortTools
   main.cpp
   utilities.cpp
@@ -48,9 +61,5 @@ add_executable(serialPortTools
   resource/resource.qrc
   #resource/app.rc
 )
-
-if(CMAKE_HOST_WIN32)
-  add_compile_definitions(_TTY_WIN_)
-endif()
 
 target_link_libraries(serialPortTools PRIVATE Qt5::Widgets Qt5::SerialPort)
