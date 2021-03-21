@@ -7,6 +7,7 @@ project(serialPortTools LANGUAGES CXX)
 find_package(Qt5 COMPONENTS Widgets SerialPort REQUIRED)
 
 include_directories(.)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
 add_executable(serialPortTools
   main.cpp
   utilities.cpp
