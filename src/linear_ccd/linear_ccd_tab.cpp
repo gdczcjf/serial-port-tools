@@ -50,7 +50,7 @@ void LinearCcdTab::takeFrame(QByteArray& data)
 {
     if(data.size() > 128)
     {
-        int index = data.lastIndexOf(0xff);
+        int index = data.lastIndexOf(static_cast<char>(0xff));
         if(index == -1)
             return;
 

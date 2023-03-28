@@ -5,8 +5,7 @@
 #include <QChar>
 #include <QString>
 
-typedef unsigned int uint32;
-static_assert(sizeof(uint32) == 4);
+typedef __INT32_TYPE__ uint32;
 typedef void (*ImgProcFunc)(const char *in, char *out, uint32 width, uint32 height); //Cluster Algorithm Based On Spatial Distribution Analysis
 
 class Utilities

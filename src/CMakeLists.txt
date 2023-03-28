@@ -3,6 +3,16 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+set (CMAKE_COMPILE_WARNING_AS_ERROR ON)
+
+if (MSVC)
+    # warning level 4
+    add_compile_options(/W4)
+else()
+    # additional warnings
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror -Wno-error=unused-but-set-variable)
+endif()
+
 project(serialPortTools LANGUAGES CXX)
 find_package(Qt5 COMPONENTS Widgets SerialPort REQUIRED)
 
